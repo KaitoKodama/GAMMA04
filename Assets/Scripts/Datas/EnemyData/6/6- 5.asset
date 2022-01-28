@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d84c94f955713b4494b70231303e3ca, type: 3}
+  m_Name: 6- 5
+  m_EditorClassIdentifier: 
+  enemySprite: {fileID: 21300000, guid: efd815b2226e5234ea184641fee6418a, type: 3}
+  _name: "\u91CD\u6B66\u88C5\u30B1\u30F3\u30BF\u30A6\u30E9"
+  level: 90
+  hp: 900
+  power: 300
+  defence: 50
+  duration: 0.2
+  exp: 40
+  gold: 40

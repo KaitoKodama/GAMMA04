@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554c1ec95eef5a74ca5f294267aac17c, type: 3}
+  m_Name: Pot02
+  m_EditorClassIdentifier: 
+  id: 1
+  _sprite: {fileID: 21300000, guid: be7a88b9673968f498b40de84e5e991e, type: 3}
+  requireGold: 10
+  _name: "\u4F4E\u7D1A\u30DD\u30FC\u30B7\u30E7\u30F3"
+  _explain: "\u4F53\u529B\u309250\u56DE\u5FA9\u3057\u307E\u3059"
+  healValue: 50

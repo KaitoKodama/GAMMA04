@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7025ec787bfe13849bb5852b325e39bb, type: 3}
+  m_Name: DBuff03
+  m_EditorClassIdentifier: 
+  id: 13
+  _sprite: {fileID: 21300000, guid: eece06a87b62f2e4eb35591a2d206cf8, type: 3}
+  requireGold: 55
+  _name: "\u4E2D\u7D1A\u9632\u5FA1\u30D0\u30D5"
+  _explain: "\u9632\u5FA1\u529B\u304C45\u79D2\u306E\u95936\u5897\u52A0\u3057\u307E\u3059"
+  elapse: 45
+  additive: 6
