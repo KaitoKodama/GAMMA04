@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+using CommonUtility;
 
 public class CVSActorEnedexLine : MonoBehaviour
 {
@@ -28,7 +28,6 @@ public class CVSActorEnedexLine : MonoBehaviour
     [SerializeField] Button openBtn;
     [SerializeField] Text pageText;
 
-    [SerializeField] Image enedexBoxImg;
     [SerializeField] GameObject enedexBox;
 
     [SerializeField] GameObject enedexGridPrefab;
@@ -39,7 +38,6 @@ public class CVSActorEnedexLine : MonoBehaviour
     private List<Enedex> enedexList = new List<Enedex>();
 
     private int currentPage = 0;
-    private bool isOpen = false;
 
 
 	private void Awake()
@@ -63,7 +61,7 @@ public class CVSActorEnedexLine : MonoBehaviour
 	}
 	void Start()
     {
-        pageText.text = "ページ：" + 1.ToString() + "/" + enedexDataList.Count.ToString();
+        pageText.text = "ページ：1/" + enedexDataList.Count.ToString();
         for (int i = 0; i < enedexList.Count; i++)
         {
             if (i < enedexDataList[0].datas.Length)
@@ -81,29 +79,20 @@ public class CVSActorEnedexLine : MonoBehaviour
     private void OnMenuBtn()
 	{
         audioSource.PlayOneShot(clickSound);
-        if (!isOpen)
-		{
-            isOpen = true;
-            enedexBox.SetActive(true);
-            enedexBoxImg.fillAmount = 0;
-            enedexBoxImg.DOFillAmount(1f, 0.5f);
-        }
-		else
-		{
-            isOpen = false;
-            enedexBoxImg.fillAmount = 1;
-            enedexBoxImg.DOFillAmount(0f, 0.5f).OnComplete(()=> { enedexBox.SetActive(false); });
-        }
+        enedexBox.SetActive(Utility.FilpFlop(enedexBox.activeSelf));
+        RefleshGridByPage();
 	}
 
     private void OnNextBtn()
 	{
+        audioSource.PlayOneShot(clickSound);
         currentPage++;
         if (currentPage >= enedexDataList.Count) currentPage = enedexDataList.Count - 1;
         RefleshGridByPage();
     }
     private void OnBackBtn()
 	{
+        audioSource.PlayOneShot(clickSound);
         currentPage--;
         if (currentPage <= 0) currentPage = 0;
         RefleshGridByPage();

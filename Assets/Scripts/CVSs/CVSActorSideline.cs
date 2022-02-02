@@ -13,10 +13,10 @@ public class CVSActorSideline : MonoBehaviour
 	[SerializeField] GameObject ptBox;
 
 	[Header("UIイメージ")]
-	[SerializeField] Image sideLineImage;
 	[SerializeField] Image menuImage;
 
 	[Header("UIボタン")]
+	[SerializeField] Button homeBtn;
 	[SerializeField] Button menuBtn;
 	[SerializeField] Button powerBtn;
 	[SerializeField] Button defenceBtn;
@@ -48,6 +48,7 @@ public class CVSActorSideline : MonoBehaviour
 		ptBox.SetActive(false);
 		audioSource = GetComponent<AudioSource>();
 		actor = GameObject.FindWithTag("Player").GetComponent<Actor>();
+		homeBtn.onClick.AddListener(OnHomeBtn);
 		menuBtn.onClick.AddListener(OnMenuBtn);
 		powerBtn.onClick.AddListener(OnPtPowerBtn);
 		defenceBtn.onClick.AddListener(OnPtDefenceBtn);
@@ -61,24 +62,29 @@ public class CVSActorSideline : MonoBehaviour
 		if (!isOpen)
 		{
 			ptBox.SetActive(true);
-			sideLineImage.DOFillAmount(1, 0.5f).OnComplete(() => { menuImage.sprite = closeSprite; });
+			menuImage.sprite = closeSprite;
 			ptTxt.text = "ステータスポイント\n" + GameManager.instance.SaveState.Gifted.ToString();
 			powerTxt.text = "攻撃力：" + GameManager.instance.SaveState.Power.ToString("F");
 			defenceTxt.text = "防御力：" + GameManager.instance.SaveState.Defence.ToString("F");
 			maxHpTxt.text = "最大HP：" + GameManager.instance.SaveState.MaxHp.ToString("F");
 			luckTxt.text = "幸運値：" + GameManager.instance.SaveState.Luck.ToString("F");
+			isOpen = true;
 		}
 		else
 		{
-			sideLineImage.DOFillAmount(0, 0.5f).OnComplete(() =>
-			{
-				menuImage.sprite = openSprite;
-				ptBox.SetActive(false);
-			});
+			ptBox.SetActive(false);
+			menuImage.sprite = openSprite;
+			isOpen = false;
 		}
 		GameManager.instance.OnSaveData();
-		isOpen = Utility.FilpFlop(isOpen);
 	}
+	private void OnHomeBtn()
+	{
+		audioSource.PlayOneShot(clickSound);
+		GameManager.instance.OnSaveData();
+		GameManager.instance.OnSceneTransit(SceneName.TitleScene);
+	}
+
 
 	private void OnPtPowerBtn()
 	{
@@ -90,6 +96,7 @@ public class CVSActorSideline : MonoBehaviour
 			actor.Power = GameManager.instance.SaveState.Power;
 			powerTxt.text = "攻撃力：" + GameManager.instance.SaveState.Power.ToString("F");
 			ptTxt.text = "ステータスポイント\n" + GameManager.instance.SaveState.Gifted.ToString();
+			actor.OnStateChangedNotifyer();
 		}
 	}
 	private void OnPtDefenceBtn()
@@ -102,6 +109,7 @@ public class CVSActorSideline : MonoBehaviour
 			actor.Defence = GameManager.instance.SaveState.Defence;
 			defenceTxt.text = "防御力：" + GameManager.instance.SaveState.Defence.ToString("F");
 			ptTxt.text = "ステータスポイント\n" + GameManager.instance.SaveState.Gifted.ToString();
+			actor.OnStateChangedNotifyer();
 		}
 	}
 	private void OnPtMaxHpBtn()
@@ -113,6 +121,7 @@ public class CVSActorSideline : MonoBehaviour
 			GameManager.instance.SaveState.MaxHp += addMaxHp;
 			maxHpTxt.text = "最大HP：" + GameManager.instance.SaveState.MaxHp.ToString("F");
 			ptTxt.text = "ステータスポイント\n" + GameManager.instance.SaveState.Gifted.ToString();
+			actor.OnStateChangedNotifyer();
 		}
 	}
 	private void OnPtLuckBtn()
@@ -124,6 +133,7 @@ public class CVSActorSideline : MonoBehaviour
 			GameManager.instance.SaveState.Luck += addLuck;
 			luckTxt.text = "幸運値：" + GameManager.instance.SaveState.Luck.ToString("F");
 			ptTxt.text = "ステータスポイント\n" + GameManager.instance.SaveState.Gifted.ToString();
+			actor.OnStateChangedNotifyer();
 		}
 	}
 }

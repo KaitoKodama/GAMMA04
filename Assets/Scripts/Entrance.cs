@@ -7,6 +7,7 @@ public class Entrance : MonoBehaviour
 	[SerializeField] AudioClip stairSound;
 	[SerializeField] EntryType entryType;
 	[SerializeField] SceneName nextScene;
+	[SerializeField] StagePatch reuirePatch;
 
 	[SerializeField] SpriteRenderer render;
 	[SerializeField] Sprite stairUP;
@@ -19,11 +20,24 @@ public class Entrance : MonoBehaviour
 		switch (entryType)
 		{
 			case EntryType.ToLowStage:
-				render.sprite = stairDOWN;
+				InitLowStage();
 				break;
 			case EntryType.ToHighStage:
-				render.sprite = stairUP;
+				InitHighStage();
 				break;
+		}
+	}
+
+	private void InitLowStage()
+	{
+		render.sprite = stairDOWN;
+	}
+	private void InitHighStage()
+	{
+		render.sprite = stairUP;
+		if (!GameManager.instance.SaveState.IsPatchHigherThanRequire(reuirePatch))
+		{
+			this.gameObject.SetActive(false);
 		}
 	}
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -41,5 +55,9 @@ public class Entrance : MonoBehaviour
 		pos.z = 0;
 		pos.y -= 2f;
 		return pos;
+	}
+	public void RefleshEntrance()
+	{
+		this.gameObject.SetActive(true);
 	}
 }

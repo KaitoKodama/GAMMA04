@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 	private string saveItemKey = "save_items_key";
 	private string saveEnedexKey = "save_enedex_key";
 
-	private SaveState saveState = new SaveState();
+	[SerializeField]private SaveState saveState = new SaveState();
 	private SaveItems saveItems = new SaveItems();
 	private SaveEnedex saveEnedex = new SaveEnedex();
 

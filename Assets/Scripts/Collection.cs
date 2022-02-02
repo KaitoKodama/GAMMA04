@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 //------------------------------------------
 // クラス
 //------------------------------------------
@@ -36,6 +37,7 @@ public class SaveState{
 	[SerializeField] float requireExp = 3.4f;
 	[SerializeField] float hp = 100;
 	[SerializeField] float maxHp = 100;
+	[SerializeField] StagePatch patch = StagePatch.None;
 	
 	public int Level { get => level; set => level = value; }
 	public float Exp { get => exp; set => exp = value; }
@@ -48,9 +50,25 @@ public class SaveState{
 	public float Gold { get => gold; set => gold = value; }
 	public int Gifted { get => gifted; set => gifted = value; }
 
+
 	public void GetHeal(float value)
 	{
 		hp = Mathf.Clamp(hp + value, 0, maxHp);
+	}
+	public void SetStagePatch(StagePatch patch)
+	{
+		if (((int)patch) > ((int)this.patch))
+		{
+			this.patch = patch;
+		}
+	}
+	public bool IsPatchHigherThanRequire(StagePatch requirePatch)
+	{
+		if (((int)patch) >= ((int)requirePatch))
+		{
+			return true;
+		}
+		return false;
 	}
 }
 
@@ -114,6 +132,7 @@ public enum ItemID
 	DBuff03,
 	DBuff04,
 	DBuff05,
+	None,
 }
 public enum ActorDir
 {
@@ -132,12 +151,23 @@ public enum EntryType
 public enum SceneName
 {
 	TitleScene,
+	TutorialScene,
 	Stage01,
 	Stage02,
 	Stage03,
 	Stage04,
 	Stage05,
 	Stage06,
+}
+public enum StagePatch
+{
+	None,
+	TutorialCompleted,
+	Stage01Completed,
+	Stage02Completed,
+	Stage03Completed,
+	Stage04Completed,
+	Stage05Completed,
 }
 
 

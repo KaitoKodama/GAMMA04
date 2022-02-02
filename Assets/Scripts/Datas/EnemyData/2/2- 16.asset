@@ -15,9 +15,9 @@ MonoBehaviour:
   enemySprite: {fileID: 21300000, guid: 83fe21f98b850f148b488f36472fbe63, type: 3}
   _name: "\u30D1\u30DA\u30EA\u30AA\u30F3\u30C7\u30D3\u30EB"
   level: 33
-  hp: 225
-  power: 34
-  defence: 3.5
-  duration: 0.65
+  hp: 240
+  power: 37
+  defence: 4.2
+  duration: 0.58
   exp: 9
   gold: 8

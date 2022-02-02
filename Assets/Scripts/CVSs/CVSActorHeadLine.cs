@@ -8,11 +8,11 @@ using CommonUtility;
 public class CVSActorHeadLine : MonoBehaviour
 {
     [SerializeField] AudioClip clickSound;
+    [SerializeField] GameObject propS;
+    [SerializeField] GameObject propL;
     [SerializeField] Button propBtn;
     [SerializeField] Image fillArea;
     [SerializeField] Image menuImage;
-    [SerializeField] Image propSImage;
-    [SerializeField] Image propLImage;
     [SerializeField] Sprite openSprite;
     [SerializeField] Sprite closeSprite;
     [SerializeField] Text propTextS;
@@ -42,15 +42,18 @@ public class CVSActorHeadLine : MonoBehaviour
         audioSource.PlayOneShot(clickSound);
 		if (!isOpen)
 		{
-            propSImage.DOFade(0, 0.5f);
-            propLImage.DOFillAmount(1, 0.5f).OnComplete(OnOpen);
+            propS.SetActive(false);
+            propL.SetActive(true);
+            menuImage.sprite = closeSprite;
+            isOpen = true;
 		}
 		else
 		{
-            propSImage.DOFade(0.6f, 0.5f);
-            propLImage.DOFillAmount(0, 0.5f).OnComplete(OnClose);
+            propL.SetActive(false);
+            propS.SetActive(true);
+            menuImage.sprite = openSprite;
+            isOpen = false;
         }
-        isOpen = Utility.FilpFlop(isOpen);
     }
     private IEnumerator PropChanger()
 	{
@@ -83,14 +86,5 @@ public class CVSActorHeadLine : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         StartCoroutine(PropChanger());
-    }
-
-    private void OnOpen()
-	{
-        menuImage.sprite = openSprite;
-    }
-    private void OnClose()
-	{
-        menuImage.sprite = closeSprite;
     }
 }

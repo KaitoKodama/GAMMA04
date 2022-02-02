@@ -47,10 +47,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c29e2992a3d8b49ba05518b8385d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageCompSound: {fileID: 8300000, guid: 5c2cb4d1aefcb9e4792de43fc9728158, type: 3}
   attackSound: {fileID: 8300000, guid: c7501b07da2b45848b051ff1fb77bb7c, type: 3}
   deathSound: {fileID: 8300000, guid: 149b5827c98400446a4d7224aacc67ed, type: 3}
   appearPrefab: {fileID: 5061585551933102983, guid: 790273baf29fe97479ded2d2bbe99bb7, type: 3}
   deathPrefab: {fileID: 7052488670056175350, guid: 67ae2629fcf7f1546a91f4fc403def75, type: 3}
+  patch: 0
+  bossData: {fileID: 0}
+  boss: {fileID: 0}
+  entranceHigher: {fileID: 0}
   prefab: {fileID: 5078866946750637091, guid: 33fd141473248c245a75e621a31c79c4, type: 3}
   transforms:
   - {fileID: 0}
@@ -81,7 +86,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc5c4d3d748c1b542a010fccd5f995e0, type: 2}
   - {fileID: 11400000, guid: 7de9c5bd1fd7cfd45b59082514abc4b0, type: 2}
   - {fileID: 11400000, guid: 875f12838cc7aad4185f49233d0d3223, type: 2}
-  - {fileID: 11400000, guid: c8f082920c3f8bf4795e52a2fd5f998a, type: 2}
+  - {fileID: 0}
 --- !u!114 &5862903201491677112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,7 +539,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: -3
   m_TargetDisplay: 0
 --- !u!114 &7774821975865976870
 MonoBehaviour:
