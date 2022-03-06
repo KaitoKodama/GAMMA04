@@ -12,15 +12,18 @@ public class CVSTitle : MonoBehaviour
 
     [SerializeField] List<AnyDictionary<BTN, Button>> buttons;
     [SerializeField] List<AnyDictionary<OBJ, GameObject>> objects;
+    [SerializeField] List<Sprite> explainSpriteList;
     [SerializeField] RectTransform ttlRect01;
     [SerializeField] RectTransform ttlRect02;
     [SerializeField] Image startImage;
+    [SerializeField] Image explainImage;
     [SerializeField] Text stateText;
     [SerializeField] Text resetText;
 
     private AudioSource audioSource;
+    private int currentExplainPage = 1;
 
-    enum BTN { Start, SetOpen, HowOpen, SetClose, HowClose, SetCright, SetReset, SetState, Reset, }
+    enum BTN { Start, SetOpen, HowOpen, SetClose, HowClose, SetCright, SetReset, SetState, Reset, HowBack, HowNext }
     enum OBJ { Chara01, Chara02, HowPanel, SetPanel, SetCrightBox, SetResetBox, SetStateBox, }
 
     void Start()
@@ -37,6 +40,8 @@ public class CVSTitle : MonoBehaviour
 
         Utility.GetDICVal(BTN.SetClose, buttons).onClick.AddListener(OnSetCloseBtn);
         Utility.GetDICVal(BTN.HowClose, buttons).onClick.AddListener(OnHowCloseBtn);
+        Utility.GetDICVal(BTN.HowBack, buttons).onClick.AddListener(OnHowBackBtn);
+        Utility.GetDICVal(BTN.HowNext, buttons).onClick.AddListener(OnHowNextBtn);
         Utility.GetDICVal(BTN.SetCright, buttons).onClick.AddListener(OnSetCrightBtn);
         Utility.GetDICVal(BTN.SetReset, buttons).onClick.AddListener(OnSetResetBtn);
         Utility.GetDICVal(BTN.SetState, buttons).onClick.AddListener(OnSetStateBtn);
@@ -106,6 +111,24 @@ public class CVSTitle : MonoBehaviour
         audioSource.PlayOneShot(clickSound);
         Utility.GetDICVal(OBJ.SetPanel, objects).SetActive(false);
     }
+
+    private void OnHowBackBtn()
+	{
+        if(currentExplainPage > 0)
+		{
+            currentExplainPage--;
+            explainImage.sprite = explainSpriteList[currentExplainPage];
+        }
+	}
+    private void OnHowNextBtn()
+	{
+        if(currentExplainPage+1 < explainSpriteList.Count)
+		{
+            currentExplainPage++;
+            explainImage.sprite = explainSpriteList[currentExplainPage];
+        }
+	}
+
 
     private void OnSetCrightBtn()
 	{

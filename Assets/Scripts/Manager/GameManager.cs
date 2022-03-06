@@ -65,8 +65,8 @@ public class GameManager : MonoBehaviour
 		group.DOFade(1, fadeDurate);
 		yield return new WaitForSeconds(fadeDurate);
 
-		SceneManager.LoadScene(nextScene.ToString());
-		
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextScene.ToString());
+		yield return new WaitUntil(() => asyncLoad.isDone);
 
 		group.DOFade(0, fadeDurate);
 		yield return new WaitForSeconds(fadeDurate);

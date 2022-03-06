@@ -2,49 +2,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GoogleMobileAds;
 using GoogleMobileAds.Api;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class GoogleAds : MonoBehaviour
 {
-    private string adUnitId;
-    private RewardedAd rewardedAd;
-
+    private BannerView bannerView;
+    private bool isTest = false;
 
     void Start()
     {
         MobileAds.Initialize(initStatus => { });
-        //adUnitId = "広告ユニットIDをコピペ（Android）";
-        adUnitId = "ca-app-pub-3940256099942544/5224354917";
-
-        this.rewardedAd = new RewardedAd(adUnitId);
-        this.rewardedAd.OnAdClosed += HandleUserClosedReward;
-        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
-
-        AdRequest request = new AdRequest.Builder().Build();
-        this.rewardedAd.LoadAd(request);
+        RequestBanner();
     }
-
-
-    public delegate void OnEarnedRewardNotifyer();
-    public OnEarnedRewardNotifyer OnEarnedRewardNotifyerHandler;
-
-    private void HandleUserClosedReward(object sender, EventArgs args)
+    private void RequestBanner()
     {
-        AdRequest request = new AdRequest.Builder().Build();
-        this.rewardedAd.LoadAd(request);
-    }
-    private void HandleUserEarnedReward(object sender, Reward args)
-    {
-        OnEarnedRewardNotifyerHandler?.Invoke();
-    }
-
-    public void ShowReawrd()
-    {
-        if (this.rewardedAd.IsLoaded())
-        {
-            this.rewardedAd.Show();
+        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        if (!isTest)
+		{
+            adUnitId = "ca-app-pub-5790859037061683/1582493065";
         }
+        AdSize adaptiveSize = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
+        bannerView = new BannerView(adUnitId, adaptiveSize, AdPosition.Bottom);
+        AdRequest request = new AdRequest.Builder().Build();
+        bannerView.LoadAd(request);
+
+        SceneManager.sceneUnloaded += OnSceneExit;
+    }
+    private void OnSceneExit(Scene current)
+	{
+        bannerView.Hide();
+        bannerView.Destroy();
     }
 }
